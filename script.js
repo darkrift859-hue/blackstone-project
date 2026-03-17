@@ -43,7 +43,7 @@ function updateChips() {
 betInput.addEventListener("input", function () {
     var val = parseInt(betInput.value)
     if (!isNaN(val) && val > 0) {
-        currentBet = Math.min(val, playerChips) // Cannot bet more than you have
+        currentBet = Math.min(val, playerChips)
     } else {
         currentBet = 1
         betInput.value = "1"
@@ -118,7 +118,6 @@ function createCardElement(card, hidden) {
     var front = document.createElement("div")
     front.classList.add("card-front")
 
-    // Red suits
     if (card.suit === "♥" || card.suit === "♦") {
         front.classList.add("red")
     }
@@ -145,8 +144,8 @@ function createCardElement(card, hidden) {
 function updateFan(container) {
     var cards = container.querySelectorAll(".card")
 
-    var spread = 20        // controls rotation (angle)
-    var spacing = 65       // controls horizontal spacing
+    var spread = 20
+    var spacing = 65
 
     for (var i = 0; i < cards.length; i++) {
         var offset = i - (cards.length - 1) / 2
@@ -166,12 +165,10 @@ function renderHands() {
     playerHand.innerHTML = ""
     computerHand.innerHTML = ""
 
-    // Player hand
     for (var i = 0; i < playerCards.length; i++) {
         playerHand.appendChild(createCardElement(playerCards[i], false))
     }
 
-    // Dealer hand
     for (var i = 0; i < dealerCards.length; i++) {
         var hidden = dealerHidden
         computerHand.appendChild(createCardElement(dealerCards[i], hidden))
@@ -188,14 +185,11 @@ function updateScores() {
 
     playerScoreTracker.textContent = "Player Score: " + playerScore
 
-    // Show ??? if dealer's hand is hidden
     if (dealerHidden) {
         dealerScoreTracker.textContent = "Dealer Score: ???"
     } else {
         dealerScoreTracker.textContent = "Dealer Score: " + computerScore
     }
-
-    determineWinner()
 }
 
 // Reveal dealer's hidden cards visually
@@ -219,20 +213,16 @@ function dealerTurn() {
         computerScore = calculateScore(dealerCards)
     }
 
-    updateScores()
     renderHands()
-    determineWinner()
 }
 
 // Determine winner and update chips
 function determineWinner() {
     revealDealerHand()
 
-    if (playerScore > 21) {
-        statusText.textContent = "Bust! Dealer Wins!"
-        playerChips -= currentBet
-    }
-    else if (computerScore > 21) {
+    if (playerScore > 21) return
+
+    if (computerScore > 21) {
         statusText.textContent = "Dealer Busts! You Win!"
         playerChips += currentBet * 2
     }
@@ -246,7 +236,7 @@ function determineWinner() {
     }
     else {
         statusText.textContent = "Push (Tie)"
-        playerChips += currentBet // Return bet
+        playerChips += currentBet
     }
 
     updateChips()
@@ -274,7 +264,6 @@ function startGame() {
     shuffleDeck()
     updateChips()
 
-    // Deal initial cards
     playerCards.push(drawCard())
     playerCards.push(drawCard())
     dealerCards.push(drawCard())
@@ -295,12 +284,25 @@ function hitAction() {
     playerCards.push(drawCard())
     updateScores()
     renderHands()
-    checkGameOver()
+    playerScore = calculateScore(playerCards)
+    if (playerScore > 21) {
+        
+        revealDealerHand()
+        statusText.textContent = "Bust! Dealer Wins!"
+        playerChips -= currentBet
+        updateChips()
+        
+        disableButtons()
+        
+    }
 }
 
 // Stay button action
 function stayAction() {
     dealerTurn()
+    computerScore = calculateScore(dealerCards)
+    updateScores()
+    determineWinner()
 }
 
 // Update current bet display
