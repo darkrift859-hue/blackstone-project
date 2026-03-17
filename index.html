@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackstone</title>
+    <link rel="stylesheet" href="./styles.css">
+
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <h1>Blackstone || Blackjack</h1>
+
+
+        <section class="dealer-section">
+            <h2>Dealer</h2>
+            <div id="dealerScoreTracker">Score: 0</div>
+            <div id="chipDisplay">Chips: 1000</div>
+            <div id="computerHand" class="hand"></div>
+        </section>
+
+
+        <div id="currentBetDisplay">Current Bet: 100</div>
+
+
+        <section class="player-section">
+            <h2>Player</h2>
+            <div id="playerScoreTracker">Score: 0</div>
+            <div id="playerHand" class="hand"></div>
+        </section>
+
+        <div class="bet-controls">
+            <label for="betInput">Bet:</label>
+            <input type="number" id="betInput" min="1" value="100" />
+        </div>
+
+        <div class="controls">
+            <button id="hitBtn">Hit</button>
+            <button id="stayBtn">Stay</button>
+            <button id="startBtn">Restart/New Game</button>
+        </div>
+
+
+        <div id="statusText">Press Hit to start the round.</div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
