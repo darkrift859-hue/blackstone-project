@@ -15,37 +15,76 @@
 
         <h1>Blackstone || Blackjack</h1>
 
+        <div class="layout">
+            <aside class="controls-column">
+                <section class="bet-panel panel">
+                    <div class="panel-header">
+                        <h2>Bet Controls</h2>
+                        <div id="currentBetDisplay">Current Bet: 100</div>
+                    </div>
+                    <div class="bet-controls">
+                        <button id="betUp25Btn" type="button">+25</button>
+                        <button id="betUp100Btn" type="button">+100</button>
+                        <button id="betMaxBtn" type="button">Max</button>
+                    </div>
+                </section>
 
-        <section class="dealer-section">
-            <h2>Dealer</h2>
-            <div id="dealerScoreTracker">Score: 0</div>
-            <div id="chipDisplay">Chips: 1000</div>
-            <div id="computerHand" class="hand"></div>
-        </section>
+                <section class="action-panel panel">
+                    <h2>Actions</h2>
+                    <div class="controls">
+                        <button id="hitBtn">Hit</button>
+                        <button id="callBtn">Call</button>
+                        <button id="foldBtn">Fold</button>
+                        <button id="stayBtn">Stay</button>
+                        <button id="startBtn">Deal Hand</button>
+                    </div>
+                </section>
 
+                <section class="wallet-panel panel">
+                    <h2>Table Info</h2>
+                    <div id="chipDisplay">Chips: 1000</div>
+                    <div id="shoeDisplay">Cards left: 0 | Discard pile: 0</div>
+                </section>
+            </aside>
 
-        <div id="currentBetDisplay">Current Bet: 100</div>
+            <main class="table-column">
+                <section class="dealer-section panel">
+                    <div class="panel-header">
+                        <h2>Dealer</h2>
+                        <div id="dealerScoreTracker">Score: 0</div>
+                    </div>
+                    <div id="computerHand" class="hand"></div>
+                </section>
 
-
-        <section class="player-section">
-            <h2>Player</h2>
-            <div id="playerScoreTracker">Score: 0</div>
-            <div id="playerHand" class="hand"></div>
-        </section>
-
-        <div class="bet-controls">
-            <label for="betInput">Bet:</label>
-            <input type="number" id="betInput" min="1" value="100" />
+                <section class="player-section panel">
+                    <div class="panel-header">
+                        <h2>Player</h2>
+                        <div id="playerScoreTracker">Score: 0</div>
+                    </div>
+                    <div id="playerHand" class="hand"></div>
+                </section>
+            </main>
+            <aside class="sidebar">
+                <section class="cpu-section panel">
+                    <div class="panel-header">
+                        <h2>CPU Table</h2>
+                        <label class="cpu-picker" for="cpuCountSelect">
+                            CPU players
+                            <select id="cpuCountSelect">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div id="cpuTable" class="cpu-table"></div>
+                </section>
+            </aside>
         </div>
 
-        <div class="controls">
-            <button id="hitBtn">Hit</button>
-            <button id="stayBtn">Stay</button>
-            <button id="startBtn">Restart/New Game</button>
-        </div>
-
-
-        <div id="statusText">Press Hit to start the round.</div>
+        <div id="statusText">Set your bet, then deal the hand. You can raise, call, or fold while playing.</div>
 
     </div>
 
